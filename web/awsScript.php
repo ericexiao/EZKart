@@ -3,10 +3,10 @@
 	$xml_obj = null;
 	
 	function itemLookup($itemID) {
-		$query = array( 'Operation'     =>'ItemLookup', 
-					'ResponseGroup' =>'Offers',
+		$query = array( 'Operation' =>'ItemLookup', 
+					'ResponseGroup' =>'Small, Offers, Images',
 					'IdType'        =>'ASIN',
-					'ItemId'        =>'047061529X' );
+					'ItemId'        => $itemID );
 		$signed_url = sign_query($query);
 	 
 		/* Use CURL to retrieve the data so that http errors can be examined */
@@ -36,13 +36,18 @@
 	 
 	/* Traverse $xml_obj to display parts of it on your website */
 		if (!is_null($xml_obj)) {
-			print_r($xmlArray);
-			if (!is_null($xmlArray) && $xmlArray['Items']['Request']['IsValid'] == "True") {
-				$rawValue = ($xmlArray['Items']['Item']['OfferSummary']['LowestNewPrice']['Amount']);
-				$formattedValue = ($xmlArray['Items']['Item']['OfferSummary']['LowestNewPrice']['FormattedPrice']);
+			//error_reporting(0);
+			//print_r($xmlArray);
+			if (!is_null($xmlArray['Items']['Request']['IsValid']) && $xmlArray['Items']['Request']['IsValid'] == "True") {
+				$name = $xmlArray['Items']['Item']['ItemAttributes']['Title'];
+				$mediumImageURL = $xmlArray['Items']['Item']['MediumImage']['URL'];
+				$rawValue = $xmlArray['Items']['Item']['OfferSummary']['LowestNewPrice']['Amount'];  
+				$formattedValue = $xmlArray['Items']['Item']['OfferSummary']['LowestNewPrice']['FormattedPrice'];
+				echo $name . '<br>';
 				echo $formattedValue;
 			}
 		}
+		error_reporting(-1);
 		exit();
 	}
 
@@ -78,7 +83,7 @@
 		/* set the server, uri, and method in variables to ensure that the 
 		   same strings are used to create the URL and to generate the signature */
 		
-	$aws_locale = '.com';
+		$aws_locale = '.com';
 		$server = 'webservices.amazon'.$aws_locale;
 		$uri = '/onca/xml'; //used in $sig and $url
 		$method = 'GET'; //used in $sig
