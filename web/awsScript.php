@@ -44,6 +44,7 @@
 				$rawValue = $xmlArray['Items']['Item']['OfferSummary']['LowestNewPrice']['Amount'];  
 				$formattedValue = $xmlArray['Items']['Item']['OfferSummary']['LowestNewPrice']['FormattedPrice'];
 				echo $name . '<br>';
+				echo "<img src ='" . $mediumImageURL . "'> <br>";
 				echo $formattedValue;
 			}
 		}
