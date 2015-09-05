@@ -2,7 +2,16 @@
 	/* Set the Amazon locale, which is the top-level domain of the server */
 	$xml_obj = null;
 	
-	function itemLookup($itemID) {
+	function itemLookup($url) {
+		if (strpos($url, "/gp/product/") !== false) {
+			$offset = strpos($url, "/gp/product/") + 12;
+			$itemID = substr($url, $offset, 10);
+		} else if (strpos($url, "/dp/") !== false) {
+			$offset = strpos($url, "/dp/") + 4;
+			$itemID = substr($url, $offset, 10);
+		} else {
+			echo "error";
+		}
 		$query = array( 'Operation' =>'ItemLookup', 
 					'ResponseGroup' =>'Small, Offers, Images',
 					'IdType'        =>'ASIN',
@@ -36,8 +45,9 @@
 	 
 	/* Traverse $xml_obj to display parts of it on your website */
 		if (!is_null($xml_obj)) {
+			echo $itemID;
 			//error_reporting(0);
-			//print_r($xmlArray);
+			print_r($xmlArray);
 			if (!is_null($xmlArray['Items']['Request']['IsValid']) && $xmlArray['Items']['Request']['IsValid'] == "True") {
 				$name = $xmlArray['Items']['Item']['ItemAttributes']['Title'];
 				$mediumImageURL = $xmlArray['Items']['Item']['MediumImage']['URL'];
@@ -45,7 +55,7 @@
 				$formattedValue = $xmlArray['Items']['Item']['OfferSummary']['LowestNewPrice']['FormattedPrice'];
 				echo $name . '<br>';
 				echo "<img src ='" . $mediumImageURL . "'> <br>";
-				echo $formattedValue;
+				echo $formattedValue; 
 			}
 		}
 		error_reporting(-1);

@@ -9,7 +9,7 @@ $(document).ready(function() {
 	$('body').on('click', 'button.btn', function(){
   		$.ajax({
     		type: "POST",
-  			url: "awsScript.php",
+  			url: "extension.php",
   			data: {
   				url: url;
   			},

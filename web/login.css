@@ -1,0 +1,42 @@
+body {
+	margin-top: 30px;
+	background-color: #F5F5F5;
+	text-align: center;
+}
+
+#loginForm {
+	display: block;
+}
+
+#recoveryForm {
+	display: none;
+} 
+
+#createForm {
+	display: none;
+}
+
+body button, #create, #login{
+	font-family: 'Ubuntu', sans-serif;
+	background: white;
+	color: black;
+	border: 2px solid black;
+	padding: 10px;
+	outline: none;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+
+body button:hover, #create:hover, #login:hover {
+	color: white;
+	background-color: black;
+	border-color: grey white white grey;
+}
+
+body button:click, #create:click, #login:click {
+	color: white;
+	text-decoration: underline;
+	background-color: black;
+	border-color: grey white white grey;
+}
+}
