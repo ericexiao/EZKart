@@ -2,7 +2,7 @@
 	/* Set the Amazon locale, which is the top-level domain of the server */
 	$xml_obj = null;
 	
-	function test() {
+	function itemLookup($itemID) {
 		$query = array( 'Operation'     =>'ItemLookup', 
 					'ResponseGroup' =>'Small,Images',
 					'IdType'        =>'ASIN',
@@ -17,21 +17,20 @@
 	   
 	   $xml_string = curl_exec($ch);
 		$curl_info = curl_getinfo($ch);
-		 if(curl_errno($ch))  echo 'Curl error: ' . curl_error($ch); 
+		if(curl_errno($ch)) { 
+			echo 'Curl error: ' . curl_error($ch); 
+		}
 		curl_close($ch);
 		 
 		if($curl_info['http_code']==200) {
 			// dump_xml($xml_string);
 			$xml_obj = simplexml_load_string($xml_string);
-			echo "success";
 		}
 		else {
 			/* examine the $curl_info to discover why AWS returned an error 
 			   $xml_string may still contain valid XML, and may include an
 			   informative error message */
-			echo $curl_info['http_code'];
 			echo json_encode($curl_info);
-			echo "failed";
 		}
 	 
 	/* Traverse $xml_obj to display parts of it on your website */

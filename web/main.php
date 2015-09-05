@@ -5,6 +5,6 @@
 	</head>
 	
 	<body>
-		<?php test(); ?>
+		<?php itemLookup("12354647"); ?>
 	</body>
 </html>
