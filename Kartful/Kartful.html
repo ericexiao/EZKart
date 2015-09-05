@@ -6,11 +6,28 @@
     <link rel="stylesheet" href="popup.css">
     <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <title>ShoppingEZ</title>
-    <script src="popup.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <title>Kartful</title>
+    <script>
+    	$(function() {
+    		$.ajax({
+	    		type: 'POST',
+	  			url: "awsScript.php",
+	  			data: {
+	  				url: ''
+	  			},
+	  			contentType: "application/json; charset=utf-8",
+	  			success: function(r) {
+	  				alert("YAY");
+	  			}
+			});
+    	}
+    </script>
   </head>
   <body>
-    <h1>ShoppingEZ</h1>
-    <button id="checkPage" type = "button" class ="btn btn-default">See Full Shopping Cart.</button>
+    <div class="col-md-4 text-center header"> 
+      <h1>Kartful</h1>
+    </div>
+    <hr></hr>
   </body>
 </html>
