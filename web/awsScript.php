@@ -4,9 +4,9 @@
 	
 	function itemLookup($itemID) {
 		$query = array( 'Operation'     =>'ItemLookup', 
-					'ResponseGroup' =>'Small,Images',
+					'ResponseGroup' =>'Offers',
 					'IdType'        =>'ASIN',
-					'ItemId'        =>'0060558121' );
+					'ItemId'        =>'047061529X' );
 		$signed_url = sign_query($query);
 	 
 		/* Use CURL to retrieve the data so that http errors can be examined */
@@ -24,7 +24,8 @@
 		 
 		if($curl_info['http_code']==200) {
 			// dump_xml($xml_string);
-			$xml_obj = simplexml_load_string($xml_string);
+			$xml_obj = simplexml_load_string($xml_string, "SimpleXMLElement");
+			$xmlArray = json_decode(json_encode($xml_obj), true);
 		}
 		else {
 			/* examine the $curl_info to discover why AWS returned an error 
@@ -35,7 +36,12 @@
 	 
 	/* Traverse $xml_obj to display parts of it on your website */
 		if (!is_null($xml_obj)) {
-			print_r($xml_obj);
+			print_r($xmlArray);
+			if (!is_null($xmlArray) && $xmlArray['Items']['Request']['IsValid'] == "True") {
+				$rawValue = ($xmlArray['Items']['Item']['OfferSummary']['LowestNewPrice']['Amount']);
+				$formattedValue = ($xmlArray['Items']['Item']['OfferSummary']['LowestNewPrice']['FormattedPrice']);
+				echo $formattedValue;
+			}
 		}
 		exit();
 	}
