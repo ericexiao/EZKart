@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
       d = document;
 
       var f = d.createElement('form');
-      f.action = 'http://google.com';
+      f.action = 'http://ericshiao.co/';
       f.method = 'post';
       var i = d.createElement('input');
       i.type = 'hidden';
