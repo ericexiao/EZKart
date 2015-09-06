@@ -7,16 +7,13 @@ $(document).ready(function() {
 		$(button).insertAfter("#title_feature_div");
 	}
 	$('body').on('click', 'button.btn', function(){
-  		$.ajax({
-    		type: "POST",
-  			url: "http://kartful.ericshiao.me/extension.php",
-  			data: {
-  				url: url;
-  			},
-  			contentType: "application/json; charset=utf-8",
-  			success: function(r) {
-  				alert("YAY");
-  	  }
-		});
+    //alert(url);
+		$.ajax({
+			url: 'INSERTPHPFILENAMEHERE',
+			data: {url: url;},
+			success: function(data) {
+				alert(data);
+	    }
+	  });
 	});
 });
