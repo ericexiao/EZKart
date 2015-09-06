@@ -1,0 +1,34 @@
+#left {
+	margin-left: 8%;
+	margin-right: 2%;
+	width: 40%;
+	float: left;
+}
+
+#right {
+	margin-left: 2%;
+	margin-right: 8%;
+	width: 40%;
+	float: right;
+}
+
+#loginForm {
+	width: 30%;
+	margin-left: 35%;
+}
+
+#createForm {
+	width: 30%;
+	margin-left: 35%;
+}
+
+#recoveryForm {
+	width: 30%;
+	margin-left: 35%;
+}
+
+#resetform {
+	width: 30%;
+	margin-left: 35%;
+	text-align: center;
+}
