@@ -9,7 +9,7 @@ $(document).ready(function() {
 	$('body').on('click', 'button.btn', function(){
   		$.ajax({
     		type: "POST",
-  			url: "extension.php",
+  			url: "http://kartful.ericshiao.me/extension.php",
   			data: {
   				url: url;
   			},
