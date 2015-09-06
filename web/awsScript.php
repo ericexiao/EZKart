@@ -1,8 +1,29 @@
 <?php
-	/* Set the Amazon locale, which is the top-level domain of the server */
+	header("Access-Control-Allow-Origin: *");
+	header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+	
+	
+	if ($_POST["url"]) {
+		$url = $_POST["url"];
+		itemLookup($url);
+		echo $url;
+	} else {
+	
+	 echo "there";
+	}
+	
 	$xml_obj = null;
 	
-	function itemLookup($itemID) {
+	function itemLookup($url) {
+		if (strpos($url, "/gp/product/") !== false) {
+			$offset = strpos($url, "/gp/product/") + 12;
+			$itemID = substr($url, $offset, 10);
+		} else if (strpos($url, "/dp/") !== false) {
+			$offset = strpos($url, "/dp/") + 4;
+			$itemID = substr($url, $offset, 10);
+		} else {
+			echo "error";
+		}
 		$query = array( 'Operation' =>'ItemLookup', 
 					'ResponseGroup' =>'Small, Offers, Images',
 					'IdType'        =>'ASIN',
@@ -26,6 +47,7 @@
 			// dump_xml($xml_string);
 			$xml_obj = simplexml_load_string($xml_string, "SimpleXMLElement");
 			$xmlArray = json_decode(json_encode($xml_obj), true);
+			$db = new mysqli('localhost', "ericineo_kartful", "Penn123!", 'ericineo_kartful');
 		}
 		else {
 			/* examine the $curl_info to discover why AWS returned an error 
@@ -36,19 +58,27 @@
 	 
 	/* Traverse $xml_obj to display parts of it on your website */
 		if (!is_null($xml_obj)) {
+			echo $itemID;
 			//error_reporting(0);
 			//print_r($xmlArray);
 			if (!is_null($xmlArray['Items']['Request']['IsValid']) && $xmlArray['Items']['Request']['IsValid'] == "True") {
-				$name = $xmlArray['Items']['Item']['ItemAttributes']['Title'];
+				$name = mysqli_real_escape_string($db, $xmlArray['Items']['Item']['ItemAttributes']['Title']);
+				$url = mysqli_real_escape_string($db, $url);
 				$mediumImageURL = $xmlArray['Items']['Item']['MediumImage']['URL'];
+				$subMediumImageURL = substr($mediumImageURL, 7);
+				$safeImageURL = mysqli_real_escape_string($db, $subMediumImageURL);
+				echo $safeImageURL;
 				$rawValue = $xmlArray['Items']['Item']['OfferSummary']['LowestNewPrice']['Amount'];  
 				$formattedValue = $xmlArray['Items']['Item']['OfferSummary']['LowestNewPrice']['FormattedPrice'];
+				$insertQuery = "insert into userProducts values('$itemID', '$url', '$name', '$formattedValue', '$safeImageURL')";
+				
+				$results = $db -> query($insertQuery) or die (mysqli_error($db));;
 				echo $name . '<br>';
-				echo "<img src ='" . $mediumImageURL . "'> <br>";
-				echo $formattedValue;
+				//echo "<img src ='" . $mediumImageURL . "'> <br>";
+				//echo $formattedValue; 
 			}
 		}
-		error_reporting(-1);
+		//error_reporting(-1);
 		exit();
 	}
 
