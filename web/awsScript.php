@@ -1,5 +1,17 @@
 <?php
-	/* Set the Amazon locale, which is the top-level domain of the server */
+	header("Access-Control-Allow-Origin: *");
+	header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+	
+	
+	if ($_POST["url"]) {
+		$url = $_POST["url"];
+		itemLookup($url);
+		echo $url;
+	} else {
+	
+	 echo "there";
+	}
+	
 	$xml_obj = null;
 	
 	function itemLookup($url) {
@@ -46,12 +58,12 @@
 	 
 	/* Traverse $xml_obj to display parts of it on your website */
 		if (!is_null($xml_obj)) {
-			//echo $itemID;
+			echo $itemID;
 			//error_reporting(0);
 			//print_r($xmlArray);
 			if (!is_null($xmlArray['Items']['Request']['IsValid']) && $xmlArray['Items']['Request']['IsValid'] == "True") {
 				$name = mysqli_real_escape_string($db, $xmlArray['Items']['Item']['ItemAttributes']['Title']);
-				$url = mysqli_real_escape_string($db, $name);
+				$url = mysqli_real_escape_string($db, $url);
 				$mediumImageURL = $xmlArray['Items']['Item']['MediumImage']['URL'];
 				$subMediumImageURL = substr($mediumImageURL, 7);
 				$safeImageURL = mysqli_real_escape_string($db, $subMediumImageURL);
@@ -61,9 +73,9 @@
 				$insertQuery = "insert into userProducts values('$itemID', '$url', '$name', '$formattedValue', '$safeImageURL')";
 				
 				$results = $db -> query($insertQuery) or die (mysqli_error($db));;
-				/*echo $name . '<br>';
-				echo "<img src ='" . $mediumImageURL . "'> <br>";
-				echo $formattedValue; */
+				echo $name . '<br>';
+				//echo "<img src ='" . $mediumImageURL . "'> <br>";
+				//echo $formattedValue; 
 			}
 		}
 		//error_reporting(-1);
