@@ -51,7 +51,7 @@
 			//print_r($xmlArray);
 			if (!is_null($xmlArray['Items']['Request']['IsValid']) && $xmlArray['Items']['Request']['IsValid'] == "True") {
 				$name = mysqli_real_escape_string($db, $xmlArray['Items']['Item']['ItemAttributes']['Title']);
-				$url = mysqli_real_escape_string($db, $name);
+				$url = mysqli_real_escape_string($db, $url);
 				$mediumImageURL = $xmlArray['Items']['Item']['MediumImage']['URL'];
 				$subMediumImageURL = substr($mediumImageURL, 7);
 				$safeImageURL = mysqli_real_escape_string($db, $subMediumImageURL);
