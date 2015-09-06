@@ -11,12 +11,12 @@ $(document).ready(function() {
     		type: "POST",
   			url: "awsScript.php",
   			data: {
-  				url: url;
+  				url: url
   			},
   			contentType: "application/json; charset=utf-8",
   			success: function(r) {
-  				alert("YAY");
-  	  }
+  				alert(r);
+			}
 		});
 	});
 });
