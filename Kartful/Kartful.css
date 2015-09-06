@@ -71,6 +71,13 @@ h2 {
     -webkit-transition:.5s;
 }
 
+img 
+{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 /*.about-section {
     height: 100%;
     text-align: center;

@@ -11,16 +11,14 @@
     <script>
     	$(function() {
     		$.ajax({
-	    		type: 'POST',
-	  			url: "getQueries.php",
+	  			url: 'getQueries.php',
 	  			data: {
-	  				url: ''
+	  				url: window.location.href;
 	  			},
-	  			contentType: "application/json; charset=utf-8",
-	  			success: function(r) {
-	  				alert("YAY");
+	  			success: function(data) {
+	  				$('#bottom').html(data);
 	  			}
-			});
+			  });
     	}
     </script>
   </head>
@@ -56,11 +54,14 @@
       </div>
     </nav>
     <div class = "bottom">
-      <div class="square">
-        <h1>HI</h1>
-        <h2>$5.99</h2>
-        <hr></hr>
-      </div>
+      <a style = "display:block" href="http://google.com">
+        <div class="square" >
+          <h1>HI</h1>
+          <h2>$5.99</h2>
+          <hr></hr>
+          <img class="square col-md-4" style = "height:80%; width:80%" src = "http://dreamatico.com/data_images/mountain/mountain-1.jpg">
+        </div>
+      </a>
       <div class="square">
         <h1>HI2</h1>
       </div>
