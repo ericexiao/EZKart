@@ -12,14 +12,14 @@
    		$stmt->bind_result($productURL, $productName, $price, $imageURL);
 
    		while($stmt->fetch()) {
-   			echo ("<a style=\"display:block\" href=\" . $productURL . \">\n");
+   			echo ("<a style=\"display:block\" href=\"" . $productURL . "\">\n");
    			echo "<div class = \"square\">\n";
    			echo ("<h1>" . $productName . "</h1>\n");
    			echo ("<h2>" . $price . "</h2>\n");
    			echo ("<hr></hr>\n");
-   			echo ("img class = \"square\" style = \"height:80%; width:80%\" src = \" . $imageURL . \"\n");
+   			echo ("<img class = \"square\" style = \"height:80%; width:80%\" src = \"" . $imageURL . "\">\n");
    			echo ("</div>\n");
-   			echo ("</a\n");
+   			echo ("</a>\n");
    		}
     }
     mysqli_close($db);
