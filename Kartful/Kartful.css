@@ -1,0 +1,90 @@
+body 
+{
+    font-family: 'Varela Round', sans-serif;
+    background-image: url(background.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color:#464646;
+}
+
+@media(min-width:767px) {
+    .navbar {
+        padding: 5px 0;
+        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
+        transition: background .5s ease-in-out,padding .5s ease-in-out;
+        font-family: 'Varela Round', sans-serif;
+        font-size: 15px;
+    }
+
+    .top-nav-collapse {
+        padding: 0;
+    }
+}
+/* Demo Sections - You can use these as guides or delete them - the scroller will work with any sort of height, fixed, undefined, or percentage based.
+The padding is very important to make sure the scrollspy picks up the right area when scrolled to. Adjust the margin and padding of sections and children 
+of those sections to manage the look and feel of the site. */
+.intro-section {
+    height: 100%;
+    text-align: center;
+    background-color: #fff;
+}
+.bottom {
+    margin-top: 50px;
+}
+h1 {
+    font-size: 25px;
+    color: #fff;
+    margin: 0;
+}
+hr {
+    margin: 0;
+}
+h2 {
+    font-size: 17px;
+    color: red;
+    margin: 0;
+    font-weight: bold;
+}
+.square {
+    float: left;
+    margin: 3%;
+    width:250px;
+    height:250px;
+    display:block;
+    overflow:hidden;
+    background-color:rgba(11,11,11,0.5);
+    padding: 2%;
+    z-index: 1;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+}
+.bottom div:hover {
+    background-color:rgba(11,11,11,0.8);
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+}
+
+/*.about-section {
+    height: 100%;
+    text-align: center;
+    background-color: #ccc;
+}
+
+.services-section {
+    height: 100%;
+    text-align: center;
+    background-color: #fff;
+}
+
+.contact-section {
+    height: 100%;
+    text-align: center;
+    background-color: #ccc;
+}*/
